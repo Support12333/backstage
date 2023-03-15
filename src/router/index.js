@@ -3,15 +3,22 @@ import VueRouter from "vue-router";
 
 Vue.use(VueRouter)
 
-const routes = [
+export const routes = [
     {
         path: '/',
-        component: () => import('../views/login/index.vue')
+        component: () => import('@views/login/index.vue')
     }
 ]
 
 const router = new VueRouter({
-    scrollBehavior: () => ({ y: 0 }),
+    mode: 'history',
+    scrollBehavior(to, from, savedPosition) {
+        if (savedPosition) {
+            return savedPosition;
+        } else {
+            return { top: 0 };
+        }
+    },
     routes
 })
 
